@@ -1,4 +1,5 @@
 import java.io.FileWriter;
+import java.util.Arrays;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,13 +11,22 @@ public class Main {
                 "{\"фамилия\":\"Петрова\",\"оценка\":\"4\",\"предмет\":\"Информатика\"}," +
                 "{\"фамилия\":\"Краснов\",\"оценка\":\"5\",\"предмет\":\"Физика\"}";
 
+        String textPars1 = text.replace("фамилия", "Студент").replace("оценка", "Получил оценку").replace("предмет", "По предмету").replace("{", "").replace("}", ".").replace("\"", "");
+        StringBuilder sb = new StringBuilder(textPars1);
+        for (int i = 0; i < sb.length(); i++) {
+            if (sb.charAt(i) == ',' || sb.charAt(i) == ':') {
+                sb.setCharAt(i, ' ');
+            }
+        }
+        logging(sb);
 
-        String textPars1 = text.replace("фамилия", "Студент").replace("оценка", "Получил оценку").replace("предмет", "По предмету").replace("{", "").replace("}", ".").replace(":", " ").replace("\"", "").replace(",", " ");
-        logging(textPars1);
-
+        /*
+        int[] bbb = {12, 44, 16, 3, 19, 28, 6, -4};
+        sort(bbb);
+         */ // вызвать для сорировки (последняя задача)
 
     }
-    static void logging(String textPars1){
+    static void logging(StringBuilder sb){
         String resultFile = "////dawd/result.txt"; // так для вызова логов. чтоыб заработала прогрмаа исправить путь к файлу
         Logger logging = Logger.getAnonymousLogger();
         FileHandler logHandler = null;
@@ -27,10 +37,10 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         logging.addHandler(logHandler);
+
         try (FileWriter writeIn = new FileWriter(resultFile)){
-            writeIn.write(textPars1);
+            writeIn.write(sb.toString());
             logging.log(Level.INFO,"Writing complete");
         } catch (Exception e){
             logging.log(Level.INFO,e.getMessage());
@@ -38,5 +48,25 @@ public class Main {
         }
 
     }
+
+    static void sort(int [] array) {
+        int temp = 0;
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 1; j < array.length-i; j++) {
+                count++;
+                System.out.println(Arrays.toString(array));
+                if (array[j] < array[j-1]){
+                    temp = array[j];
+                    array[j] = array[j-1];
+                    array[j-1] = temp;
+                }
+
+            }
+        }
+        System.out.println(Arrays.toString(array));
+        System.out.println(count);
+    }
+
 
 }

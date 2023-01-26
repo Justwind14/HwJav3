@@ -1,2 +1,2 @@
-янв. 26, 2023 5:12:55 PM Main logging
+янв. 26, 2023 11:12:18 PM Main logging
 INFO: \\dawd\result.txt (Не найден сетевой путь)
